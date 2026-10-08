@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Гра — Наталія Наход</title>
+    <meta name="description" content="Міні-гра для сторінки Наталії Наход." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand">Наталія Наход</div>
+        <nav class="nav-links" aria-label="Головна навігація">
+          <a href="index.html">Головна</a>
+          <a href="index.html#about">Про мене</a>
+          <a href="index.html#experience">Досвід</a>
+          <a href="index.html#contact">Контакти</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section alt game-section" id="game">
+        <div class="container game-wrap">
+          <div class="game-copy">
+            <p class="section-tag">Міні-гра</p>
+            <h2>Вгадай число</h2>
+            <p>
+              Я загадала число від 1 до 10. Спробуй вгадати за мінімум спроб!
+            </p>
+          </div>
+
+          <div class="game-box">
+            <div class="game-status" id="gameStatus">Спробуй вгадати число!</div>
+            <div class="game-controls">
+              <input id="guessInput" type="number" min="1" max="10" placeholder="1-10" />
+              <button id="guessBtn" type="button">Перевірити</button>
+            </div>
+            <button id="restartBtn" class="button secondary small" type="button">
+              Нова гра
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <p class="section-tag">Контакти</p>
+          <h3>Запрошую до співпраці та плідної роботи над розвитком дітей.</h3>
+        </div>
+        <a href="mailto:nataliia.nakhod@example.com">nataliia.nakhod@example.com</a>
+      </div>
+    </footer>
+
+    <script>
+      const secretNumber = () => Math.floor(Math.random() * 10) + 1;
+      let target = secretNumber();
+      let attempts = 0;
+
+      const input = document.getElementById("guessInput");
+      const status = document.getElementById("gameStatus");
+      const guessBtn = document.getElementById("guessBtn");
+      const restartBtn = document.getElementById("restartBtn");
+
+      function updateStatus(message, success = false) {
+        status.textContent = message;
+        status.style.color = success ? "#1f7a4d" : "#aa543d";
+      }
+
+      function handleGuess() {
+        const value = Number(input.value);
+
+        if (!value || value < 1 || value > 10) {
+          updateStatus("Введіть число від 1 до 10.");
+          input.focus();
+          return;
+        }
+
+        attempts += 1;
+
+        if (value === target) {
+          updateStatus(`Вітаю! Ви вгадали число ${target} за ${attempts} спроб.`, true);
+          guessBtn.disabled = true;
+          return;
+        }
+
+        if (value < target) {
+          updateStatus("Загадане число більше.");
+        } else {
+          updateStatus("Загадане число менше.");
+        }
+
+        input.value = "";
+        input.focus();
+      }
+
+      function restartGame() {
+        target = secretNumber();
+        attempts = 0;
+        input.value = "";
+        guessBtn.disabled = false;
+        updateStatus("Спробуй вгадати число!");
+        input.focus();
+      }
+
+      guessBtn.addEventListener("click", handleGuess);
+      restartBtn.addEventListener("click", restartGame);
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") handleGuess();
+      });
+
+      updateStatus("Спробуй вгадати число!");
+      input.focus();
+    </script>
+  </body>
+</html>

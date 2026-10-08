@@ -261,6 +261,88 @@ a {
   font-weight: 600;
 }
 
+.game-section {
+  padding-top: 2rem;
+}
+
+.game-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.game-copy h2 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.05em;
+}
+
+.game-copy p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.game-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.game-status {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  min-height: 28px;
+}
+
+.game-controls {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.game-controls input {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.game-controls button,
+.button.small {
+  border: none;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.game-controls button {
+  padding: 0.9rem 1.2rem;
+}
+
+.button.small {
+  padding: 0.8rem 1rem;
+}
+
+.game-controls button:hover,
+.button.small:hover {
+  transform: translateY(-1px);
+}
+
+.game-controls button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .site-footer {
   padding: 3rem 0 4rem;
 }
@@ -284,6 +366,7 @@ a {
   .hero-inner,
   .two-col,
   .card-grid,
+  .game-wrap,
   .footer-inner {
     display: grid;
     grid-template-columns: 1fr;
@@ -304,5 +387,9 @@ a {
 
   .hero-copy h1 {
     max-width: 100%;
+  }
+
+  .game-controls {
+    flex-direction: column;
   }
 }
